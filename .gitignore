@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+logs/
+*.log
+coverage/
+.DS_Store
+uploads/*.jpg
+uploads/*.jpeg
+uploads/*.png
+uploads/*.gif
+!uploads/.gitkeep
+!logs/.gitkeep
+src/backend/node_modules
+src/frontend/node_modules

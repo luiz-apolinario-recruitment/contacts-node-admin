@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: contacts-db
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: luizapolinario_nodejs
+      MYSQL_USER: luizapolinario-nodejs
+      MYSQL_PASSWORD: htRXjgamLoiRXhX
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - contacts-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contacts-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - contacts-network
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    container_name: contacts-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+    networks:
+      - contacts-network
+
+volumes:
+  db_data:
+
+networks:
+  contacts-network:
+    driver: bridge

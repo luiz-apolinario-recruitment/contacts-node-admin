@@ -1,0 +1,24 @@
+{
+  "name": "luiz-apolinario-contacts-app",
+  "version": "1.0.0",
+  "description": "Contacts Management Application - NodeJS + Vue3",
+  "author": "Luiz Apolinario",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run install:backend && npm run install:frontend && npm run build",
+    "setup": "npm run install:backend && npm run install:frontend && npm run build",
+    "install:backend": "cd src/backend && npm install",
+    "install:frontend": "cd src/frontend && npm install",
+    "build": "cd src/frontend && npm run build",
+    "start": "cd src/backend && node server.js",
+    "test": "cd src/backend && npm test",
+    "pm2:start": "pm2 start ecosystem.config.cjs",
+    "pm2:restart": "pm2 restart all",
+    "pm2:logs": "pm2 logs",
+    "pm2:status": "pm2 status"
+  },
+  "devDependencies": {
+    "pm2": "^5.3.1",
+    "concurrently": "^8.2.2"
+  }
+}
